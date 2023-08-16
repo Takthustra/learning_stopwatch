@@ -21,7 +21,7 @@ public class Users {
 	private String password;
 	/** 作成日時 */
 	private Timestamp created_at;
-	/** 作成日時 */
+	/** 更新日時 */
 	private Timestamp updated_at;
 
 }
