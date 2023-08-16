@@ -1,5 +1,7 @@
 package com.example.learning_timer.entity;
 
+import java.sql.Timestamp;
+
 import org.springframework.data.annotation.Id;
 
 import lombok.AllArgsConstructor;
@@ -18,8 +20,8 @@ public class Users {
 	/** パスワード */
 	private String password;
 	/** 作成日時 */
-	private String created_at;
+	private Timestamp created_at;
 	/** 作成日時 */
-	private String updated_at;
+	private Timestamp updated_at;
 
 }
