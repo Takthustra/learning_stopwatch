@@ -18,7 +18,15 @@ public interface UsersRepository extends CrudRepository<Users,Integer>{
 	@Query("SELECT NAME FROM USERS WHERE NAME = :name")
 	String uniqueUser(@Param("name") String name);
 	
-	//ログイン
+	//ユーザ照合
 	@Query("SELECT * FROM USERS WHERE NAME = :name AND PASSWORD = :password")
 	Users login(@Param("name") String name,@Param("password") String password);
+
+	//パスワード変更
+	@Query("update users set password = :password where name = :name")
+	void updatePassword(@Param("name") String name,@Param("password") String password);
+
+	//ユーザ削除
+	@Query("delete users where name = :name and password = :password")
+	Users deleteUser(@Param("name") String name,@Param("password") String password);
 }
