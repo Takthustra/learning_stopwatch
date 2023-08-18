@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateUserForm {
     /** ユーザ名 */
-    @NotBlank
+    @NotBlank(message = "ユーザ名:空白です。")
     private String name;
     /** パスワード */
-    @NotBlank
+    @NotBlank(message = "パスワード:空白です。")
     private String password;
 }

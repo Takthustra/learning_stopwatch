@@ -7,11 +7,28 @@
     <body>
         <h1>ユーザ作成</h1>
         <h3>ユーザ登録フォーム</h3>
-<!--         Form -->
-         <form method="POST" th:action="${complete}" th:object="${createUserForm}"> 
+		<!--▽▽　Formを表示　▽▽-->
+         <form method="post" th:action="@{create}" th:object="${createUserForm}"> 
+			 
          <label>ユーザ名:</label><input type="text" th:field="*{name}"><br> 
          <label>パスワード:</label><input type="text" th:field="*{password}"><br> 
+
          <input type="submit" value="送信"> 
+         <!--△△　Formを表示　△△-->
+         
+         <!--▽▽ エラーを表示する ▽▽-->
+         <ul th:if="${#fields.hasErrors('*')}">
+			 <li th:each="err:${#fields.errors('*')}" th:text="${err}">
+				 
+			 </li>
+		 </ul>
+		 <!--△△ エラーを表示する △△-->
+		 <!--▽▽ 登録結果を表示する ▽▽-->
+         <th:block th:if="${result}">
+			 <p th:text="${result}"></p>
+         </th>
+         <!--△△ 登録結果を表示する △△-->
+         
          </form>  
     </body>
 </html>

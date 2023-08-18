@@ -5,7 +5,7 @@ import com.example.learning_timer.entity.Users;
 /** Usersサービス処理:Service */
 public interface UsersService{
     /** ユーザを登録します */
-    String createUser(String name,String password);
+    boolean createUser(String name,String password);
     /** 特定のユーザでログインします */
     Users loginUser(String name,String password);
     /** ユーザのパスワードを変更します */

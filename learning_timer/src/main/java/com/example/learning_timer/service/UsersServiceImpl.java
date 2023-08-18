@@ -13,14 +13,14 @@ public class UsersServiceImpl implements UsersService{
     UsersRepository repository;
     
     @Override
-    public String createUser(String name,String password){
+    public boolean createUser(String name,String password){
         //ユーザの重複チェック
         String str = repository.uniqueUser(name);
-        if(str.equals(null)){
+        if(str == null){
             repository.createUser(name, password);
-            return "ユーザ名:" + name +"で作成しました";
+            return true;
         }else{
-            return "そのユーザ名は既に存在します";
+            return false;
         }
 
     }
