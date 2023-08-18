@@ -20,7 +20,7 @@ public interface UsersRepository extends CrudRepository<Users,Integer>{
 	
 	//ユーザ照合
 	@Query("SELECT * FROM USERS WHERE NAME = :name AND PASSWORD = :password")
-	Users login(@Param("name") String name,@Param("password") String password);
+	Users loginUser(@Param("name") String name,@Param("password") String password);
 
 	//パスワード変更
 	@Query("update users set password = :password where name = :name")
@@ -28,5 +28,5 @@ public interface UsersRepository extends CrudRepository<Users,Integer>{
 
 	//ユーザ削除
 	@Query("delete users where name = :name and password = :password")
-	Users deleteUser(@Param("name") String name,@Param("password") String password);
+	void deleteUser(@Param("name") String name,@Param("password") String password);
 }
