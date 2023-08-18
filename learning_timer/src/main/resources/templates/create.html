@@ -7,11 +7,11 @@
     <body>
         <h1>ユーザ作成</h1>
         <h3>ユーザ登録フォーム</h3>
-        <!-- Form -->
-        <!-- <form method="POST" th:action="${complete}" th:object="${createUserForm}"> -->
-        <!-- <label>ユーザ名:</label><input type="text" th:field="*{*name}"><br> -->
-        <!-- <label>パスワード:</label><input type="text" th:field="*{*password}"><br> -->
-        <!-- <input type="submit" value="送信"> -->
-        <!-- </form>  -->
+<!--         Form -->
+         <form method="POST" th:action="${complete}" th:object="${createUserForm}"> 
+         <label>ユーザ名:</label><input type="text" th:field="*{name}"><br> 
+         <label>パスワード:</label><input type="text" th:field="*{password}"><br> 
+         <input type="submit" value="送信"> 
+         </form>  
     </body>
 </html>
