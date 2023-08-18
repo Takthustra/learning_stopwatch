@@ -26,31 +26,6 @@ public class UsersController{
 
         return "create";
     }
-    @GetMapping("hello1")
-    public String showHello(CreateUserForm form,Model model){
 
-        return "hello1";
-    }
-    @GetMapping("apple")
-    public String showApple(CreateUserForm form,Model model){
-
-        return "apple";
-    }
-    @GetMapping("orange")
-    public String showOrange(CreateUserForm form,Model model){
-
-        return "orange";
-    }
-
-    @GetMapping("melon")
-    public String showMelon(CreateUserForm form,Model model){
-
-        return "melon";
-    }
-    @GetMapping("lemon")
-    public String showLemon(CreateUserForm form,Model model){
-
-        return "lemon";
-    }
 
 }
