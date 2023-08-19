@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateUserForm {
+public class UserForm {
     /** ユーザ名 */
     @NotBlank(message = "ユーザ名:空白です。")
     private String name;

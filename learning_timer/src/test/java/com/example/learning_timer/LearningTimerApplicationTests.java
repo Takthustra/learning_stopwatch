@@ -17,7 +17,7 @@ class LearningTimerApplicationTests {
 	UsersService service;
 
 	@Test
-	public void contextLoads() {
+	public void uniqueUser() {
 		 String str = repository.uniqueUser("hoge");
 		 System.out.println(str);
 		 assertEquals(str,"hoge");
@@ -25,9 +25,16 @@ class LearningTimerApplicationTests {
 	}
 	@Test
 	public void createUser() {
-		 boolean bool1 = service.createUser("hoge", "hoge");
+		boolean bool1 = service.createUser("hoge", "hoge");
 		assertEquals(bool1,false);
 		boolean bool2 = service.createUser("dna","dna");
+		assertEquals(bool2,false);
+	}
+	@Test
+	public void loginUser() {
+		boolean bool1 = service.loginUser("hoge", "hoge");
+		assertEquals(bool1,true);
+		boolean bool2 = service.loginUser("hoge","h");
 		assertEquals(bool2,false);
 	}
 

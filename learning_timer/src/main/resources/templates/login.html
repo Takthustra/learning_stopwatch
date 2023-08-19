@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ログイン</title>
+</head>
+<body>
+	<h1>ログインフォーム</h1>
+	<!--▽▽　Formを表示　▽▽-->
+     <form method="post" th:action="@{login}" th:object="${userForm}"> 
+		 
+     <label>ユーザ名:</label><input type="text" th:field="*{name}"><br> 
+     <label>パスワード:</label><input type="text" th:field="*{password}"><br> 
+
+     <input type="submit" value="ログイン"><br>
+
+     <!--△△　Formを表示　△△-->
+     
+     <!--▽▽ エラーを表示する ▽▽-->
+     <ul th:if="${#fields.hasErrors('*')}">
+		 <li th:each="err:${#fields.errors('*')}" th:text="${err}">
+			 
+		 </li>
+	 </ul><br>
+	 <!--△△ エラーを表示する △△-->
+	 <!--▽▽ 登録結果を表示する ▽▽-->
+     <th:block th:if="${result}">
+		 <p th:text="${result}"></p>
+     </th><br>
+     <!--△△ 登録結果を表示する △△-->
+	<a th:href="@{create}">新規登録はこちら</a>
+	</form>
+</body>
+</html>

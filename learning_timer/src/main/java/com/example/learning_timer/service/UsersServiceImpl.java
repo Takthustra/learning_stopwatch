@@ -26,8 +26,14 @@ public class UsersServiceImpl implements UsersService{
     }
 
     @Override
-    public Users loginUser(String name,String password){
-        return null;
+    public boolean loginUser(String name,String password){
+        //ユーザ名とパスワードで照合できるかチェック
+    	Users user = repository.loginUser(name, password);
+    	if(user != null) {
+    		return true;
+    	}else {
+    		return false;
+    	}
 
     }
 

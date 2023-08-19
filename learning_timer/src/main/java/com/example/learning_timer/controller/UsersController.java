@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 /** Userコントローラ */
 
-import com.example.learning_timer.form.CreateUserForm;
+import com.example.learning_timer.form.UserForm;
 import com.example.learning_timer.service.UsersService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("user")
@@ -20,41 +22,71 @@ public class UsersController {
 	/** DI対象 */
 	@Autowired
 	UsersService service;
+	@Autowired
+	HttpSession session;
 
+	/** Formの初期化 */
 	@ModelAttribute
-	public CreateUserForm setUpForm() {
-		CreateUserForm form = new CreateUserForm();
+	public UserForm setUpForm() {
+		UserForm form = new UserForm();
 		return form;
 	}
 
+	@GetMapping("login")
+	public String getLogin(UserForm form, Model model) {
+
+		return "login";
+	}
+
+	@PostMapping("login")
+	public String postLogin(@Validated UserForm form, BindingResult bindingResult, Model model) {
+		String result = null;
+
+		if (bindingResult.hasErrors()) {
+			//ログイン画面へ戻る
+			return "login";
+		}
+
+		//ログインできたかの判断
+		boolean bool = service.loginUser(form.getName(), form.getPassword());
+		if (bool) {
+			session.setAttribute("name", form.getName());
+			return "redirect:/main";
+
+		} else {
+			result = "ログインできませんでした。";
+		}
+		model.addAttribute("result", result);
+		return getLogin(form,model);
+	}
+
 	@GetMapping("create")
-	public String showCreate(CreateUserForm form, Model model) {
-		
+	public String getCreate(UserForm form, Model model) {
+
 		return "create";
 	}
 
 	@PostMapping("create")
-	public String completeCreate(
-			@Validated CreateUserForm form,BindingResult bindingResult, Model model
-			) {	
+	public String postCreate(@Validated UserForm form, BindingResult bindingResult, Model model) {
 		String result = null;
 
 		if (bindingResult.hasErrors()) {
 			//ユーザ作成画面へ戻る
 			return "create";
+		}
+
+		//データベースに登録できたかの判断
+		boolean bool = service.createUser(form.getName(), form.getPassword());
+		if (bool) {
+			result = "ユーザ名:" + form.getName() + "で登録完了しました！";
+
 		} else {
-			//データベースに登録できたかの判断
-			boolean bool = service.createUser(form.getName(), form.getPassword());
-			if (bool) {
-				result = "ユーザ名:" + form.getName() + "で登録完了しました！";
-			} else {
-				result = "ユーザ名:" + form.getName() + "は既に使われています。";
-			}
+			result = "ユーザ名:" + form.getName() + "は既に使われています。";
 		}
 
 		model.addAttribute("result", result);
-		return "create";
-		
+		return getCreate(form,model);
+
 	}
 
 }

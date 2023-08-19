@@ -8,7 +8,7 @@
         <h1>ユーザ作成</h1>
         <h3>ユーザ登録フォーム</h3>
 		<!--▽▽　Formを表示　▽▽-->
-         <form method="post" th:action="@{create}" th:object="${createUserForm}"> 
+         <form method="post" th:action="@{create}" th:object="${userForm}"> 
 			 
          <label>ユーザ名:</label><input type="text" th:field="*{name}"><br> 
          <label>パスワード:</label><input type="text" th:field="*{password}"><br> 
