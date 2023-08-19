@@ -31,11 +31,15 @@ public class UsersController {
 		UserForm form = new UserForm();
 		return form;
 	}
-
+	
+	/*
+	 * ログイン処理
+	 */
+	
 	@GetMapping("login")
 	public String getLogin(UserForm form, Model model) {
 
-		return "login";
+		return "user/login";
 	}
 
 	@PostMapping("login")
@@ -44,7 +48,7 @@ public class UsersController {
 
 		if (bindingResult.hasErrors()) {
 			//ログイン画面へ戻る
-			return "login";
+			return "user/login";
 		}
 
 		//ログインできたかの判断
@@ -57,13 +61,17 @@ public class UsersController {
 			result = "ログインできませんでした。";
 		}
 		model.addAttribute("result", result);
-		return getLogin(form,model);
+		return "user/login";
 	}
+	
+	/*
+	 * ユーザ作成処理
+	 */
 
 	@GetMapping("create")
 	public String getCreate(UserForm form, Model model) {
 
-		return "create";
+		return "user/create";
 	}
 
 	@PostMapping("create")
@@ -72,7 +80,7 @@ public class UsersController {
 
 		if (bindingResult.hasErrors()) {
 			//ユーザ作成画面へ戻る
-			return "create";
+			return "user/create";
 		}
 
 		//データベースに登録できたかの判断
@@ -85,8 +93,14 @@ public class UsersController {
 		}
 
 		model.addAttribute("result", result);
-		return getCreate(form,model);
+		return "user/create";
 
 	}
+	
+	/*
+	 * ユーザパスワード変更処理
+	 */
+	
+	
 
 }
