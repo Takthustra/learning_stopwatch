@@ -6,15 +6,14 @@
 </head>
 <body>
 	<h1>ログインフォーム</h1>
-	<!--▽▽　Formを表示　▽▽-->
+	<!--▽▽　ログインフォームを表示　▽▽-->
      <form method="post" th:action="@{login}" th:object="${userForm}"> 
 		 
      <label>ユーザ名:</label><input type="text" th:field="*{name}"><br> 
      <label>パスワード:</label><input type="text" th:field="*{password}"><br> 
 
      <input type="submit" value="ログイン"><br>
-
-     <!--△△　Formを表示　△△-->
+     <!--△△　ログインフォームを表示　△△-->
      
      <!--▽▽ エラーを表示する ▽▽-->
      <ul th:if="${#fields.hasErrors('*')}">
