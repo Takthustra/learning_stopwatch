@@ -6,11 +6,15 @@ import org.springframework.stereotype.Service;
 import com.example.learning_stopwatch.entity.User;
 import com.example.learning_stopwatch.repository.UserRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class UserServiceImpl implements UserService{
     /** Repository:注入 */
     @Autowired
     UserRepository repository;
+	@Autowired
+	HttpSession session;
     
     @Override
     public boolean createUser(String name,String password){
@@ -30,6 +34,8 @@ public class UserServiceImpl implements UserService{
         //ユーザ名とパスワードで照合できるかチェック
     	User user = repository.loginUser(name, password);
     	if(user != null) {
+    		//照合出来たらセッションにUser情報を保存
+    		session.setAttribute("user",user);
     		return true;
     	}else {
     		return false;

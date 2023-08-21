@@ -14,16 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.learning_stopwatch.form.UserForm;
 import com.example.learning_stopwatch.service.UserService;
 
-import jakarta.servlet.http.HttpSession;
-
 @Controller
 @RequestMapping("user")
 public class UserController {
 	/** DI対象 */
 	@Autowired
 	UserService service;
-	@Autowired
-	HttpSession session;
 
 	/** Formの初期化 */
 	@ModelAttribute
@@ -54,7 +50,6 @@ public class UserController {
 		//ログインできたかの判断
 		boolean bool = service.loginUser(form.getName(), form.getPassword());
 		if (bool) {
-			session.setAttribute("name", form.getName());
 			return "redirect:/main";
 
 		} else {

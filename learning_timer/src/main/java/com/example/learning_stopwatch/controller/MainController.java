@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.learning_stopwatch.entity.User;
 import com.example.learning_stopwatch.form.UserForm;
 import com.example.learning_stopwatch.service.UserService;
 
@@ -23,10 +24,10 @@ public class MainController {
 
 	@GetMapping
 	public String getMain(UserForm form, Model model) {
-		String name = (String) session.getAttribute("name");
+		User user = (User) session.getAttribute("user");
 
 		//ログイン時のsessionが生成されているか確認
-		if (name != null) {
+		if (user != null) {
 			return "main/top";
 		} else {
 			return "redirect:/user/login";
