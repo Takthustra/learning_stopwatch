@@ -10,18 +10,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.learning_stopwatch.entity.Daily_Learning_Time;
 import com.example.learning_stopwatch.repository.LearningTimeRepository;
+import com.example.learning_stopwatch.service.LearningTimeService;
 
 @SpringBootTest
-class Daily_TimeTests {
+class LearningTimeTests {
 	@Autowired
 	LearningTimeRepository repository;
+	@Autowired
+	LearningTimeService service;
 
 	@Test
 	public void updateTodayTime() {
 		
-		repository.updateTodaysTime(1,Time.valueOf("02:30:00"));
+		repository.updateTodaysData(1,Time.valueOf("02:30:00"),null);
 		
-		Daily_Learning_Time dt = repository.readTodaysTime(1);
+		Daily_Learning_Time dt = repository.readTodaysData(1);
 		assertEquals(dt.getLearning_time(),Time.valueOf("02:30:00"));
 		
 	}
@@ -29,11 +32,29 @@ class Daily_TimeTests {
 	@Test
 	public void createTodayTime() {
 		
-		repository.createTodaysTime(2,Time.valueOf("02:00:00"));
+		repository.createTodaysData(2,Time.valueOf("02:00:00"),null);
 		
-		Daily_Learning_Time dt = repository.readTodaysTime(1);
+		Daily_Learning_Time dt = repository.readTodaysData(1);
 		assertEquals(dt.getLearning_time(),Time.valueOf("02:00:00"));
 		
 	}
+	
+	@Test
+	public void setTodayTime() {
+		int userId1 = 1;
+		Time time1 = Time.valueOf("03:03:03");
+		
+		service.setTodaysData(userId1, time1,"今日は3時間がんばった");
+		Daily_Learning_Time dt1 = repository.readTodaysData(userId1);
+		assertEquals(dt1.getLearning_time(),Time.valueOf("03:03:03"));
+		
+		int userId2 = 2;
+		Time time2 = Time.valueOf("01:02:03");
+		
+		service.setTodaysData(userId2, time2,"今日は1時間集中した");
+		Daily_Learning_Time dt2 = repository.readTodaysData(userId2);
+		assertEquals(dt2.getLearning_time(),Time.valueOf("01:02:03"));
+	}
+	
 
 }
