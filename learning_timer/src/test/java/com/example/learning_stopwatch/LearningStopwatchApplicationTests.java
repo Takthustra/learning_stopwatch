@@ -1,4 +1,4 @@
-package com.example.learning_timer;
+package com.example.learning_stopwatch;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.stopwatch.repository.UsersRepository;
-import com.example.stopwatch.service.UsersService;
+import com.example.learning_stopwatch.repository.UsersRepository;
+import com.example.learning_stopwatch.service.UsersService;
 
 @SpringBootTest
-class LearningTimerApplicationTests {
+class LearningStopwatchApplicationTests {
 	@Autowired
 	UsersRepository repository;
 	@Autowired

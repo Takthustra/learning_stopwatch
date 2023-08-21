@@ -1,4 +1,4 @@
-package com.example.stopwatch.service;
+package com.example.learning_stopwatch.service;
 
 /** Usersサービス処理:Service */
 public interface UsersService{

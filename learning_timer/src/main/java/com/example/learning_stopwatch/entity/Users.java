@@ -1,4 +1,4 @@
-package com.example.stopwatch.entity;
+package com.example.learning_stopwatch.entity;
 
 import java.sql.Timestamp;
 

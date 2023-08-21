@@ -1,4 +1,4 @@
-package com.example.stopwatch.form;
+package com.example.learning_stopwatch.form;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
