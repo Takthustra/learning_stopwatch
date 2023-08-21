@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public class Daily_Time {
+	public class Daily_Learning_Time {
 		/** 識別ID */
 		@Id
 		private Integer id;

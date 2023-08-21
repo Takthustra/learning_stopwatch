@@ -7,10 +7,10 @@ import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import com.example.learning_stopwatch.entity.Daily_Time;
+import com.example.learning_stopwatch.entity.Daily_Learning_Time;
 
 /** Usersテーブル:RepositoryImpl */
-public interface Daily_TimeRepository extends CrudRepository<Daily_Time,Integer>{
+public interface LearningTimeRepository extends CrudRepository<Daily_Learning_Time,Integer>{
 	//学習時間登録
 	@Modifying
 	@Query("insert into daily_time (user_id,learning_time) values(:userId,:time)")
@@ -23,7 +23,7 @@ public interface Daily_TimeRepository extends CrudRepository<Daily_Time,Integer>
 	
 	//本日の学習データの取得
 	@Query("select * from daily_time where user_id = :userId and date = curdate();")
-	Daily_Time readTodaysTime(@Param("userId") int userId);
+	Daily_Learning_Time readTodaysTime(@Param("userId") int userId);
 	
 	
 }

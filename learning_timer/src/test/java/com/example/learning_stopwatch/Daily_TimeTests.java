@@ -8,20 +8,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.learning_stopwatch.entity.Daily_Time;
-import com.example.learning_stopwatch.repository.Daily_TimeRepository;
+import com.example.learning_stopwatch.entity.Daily_Learning_Time;
+import com.example.learning_stopwatch.repository.LearningTimeRepository;
 
 @SpringBootTest
 class Daily_TimeTests {
 	@Autowired
-	Daily_TimeRepository repository;
+	LearningTimeRepository repository;
 
 	@Test
 	public void updateTodayTime() {
 		
 		repository.updateTodaysTime(1,Time.valueOf("02:30:00"));
 		
-		Daily_Time dt = repository.readTodaysTime(1);
+		Daily_Learning_Time dt = repository.readTodaysTime(1);
 		assertEquals(dt.getLearning_time(),Time.valueOf("02:30:00"));
 		
 	}
@@ -31,7 +31,7 @@ class Daily_TimeTests {
 		
 		repository.createTodaysTime(2,Time.valueOf("02:00:00"));
 		
-		Daily_Time dt = repository.readTodaysTime(1);
+		Daily_Learning_Time dt = repository.readTodaysTime(1);
 		assertEquals(dt.getLearning_time(),Time.valueOf("02:00:00"));
 		
 	}
