@@ -1,7 +1,7 @@
 package com.example.learning_stopwatch.service;
 
 /** Usersサービス処理:Service */
-public interface UsersService{
+public interface UserService{
     /** ユーザを登録します */
     boolean createUser(String name,String password);
     /** 特定のユーザでログインします */

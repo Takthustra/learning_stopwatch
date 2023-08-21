@@ -3,14 +3,14 @@ package com.example.learning_stopwatch.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.learning_stopwatch.entity.Users;
-import com.example.learning_stopwatch.repository.UsersRepository;
+import com.example.learning_stopwatch.entity.User;
+import com.example.learning_stopwatch.repository.UserRepository;
 
 @Service
-public class UsersServiceImpl implements UsersService{
+public class UserServiceImpl implements UserService{
     /** Repository:注入 */
     @Autowired
-    UsersRepository repository;
+    UserRepository repository;
     
     @Override
     public boolean createUser(String name,String password){
@@ -28,7 +28,7 @@ public class UsersServiceImpl implements UsersService{
     @Override
     public boolean loginUser(String name,String password){
         //ユーザ名とパスワードで照合できるかチェック
-    	Users user = repository.loginUser(name, password);
+    	User user = repository.loginUser(name, password);
     	if(user != null) {
     		return true;
     	}else {

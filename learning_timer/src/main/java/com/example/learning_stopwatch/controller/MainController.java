@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.learning_stopwatch.form.UserForm;
-import com.example.learning_stopwatch.service.UsersService;
+import com.example.learning_stopwatch.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
 	/** DI対象 */
 	@Autowired
-	UsersService service;
+	UserService service;
 	@Autowired
 	HttpSession session;
 

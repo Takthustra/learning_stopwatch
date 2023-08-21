@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.learning_stopwatch.repository.UsersRepository;
-import com.example.learning_stopwatch.service.UsersService;
+import com.example.learning_stopwatch.repository.UserRepository;
+import com.example.learning_stopwatch.service.UserService;
 
 @SpringBootTest
 class LearningStopwatchApplicationTests {
 	@Autowired
-	UsersRepository repository;
+	UserRepository repository;
 	@Autowired
-	UsersService service;
+	UserService service;
 
 	@Test
 	public void uniqueUser() {

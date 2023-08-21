@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public class Users {
+	public class User {
 		/** 識別ID */
 		@Id
 		private Integer id;

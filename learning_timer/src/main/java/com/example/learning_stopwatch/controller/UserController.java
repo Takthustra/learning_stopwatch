@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /** Userコントローラ */
 
 import com.example.learning_stopwatch.form.UserForm;
-import com.example.learning_stopwatch.service.UsersService;
+import com.example.learning_stopwatch.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("user")
-public class UsersController {
+public class UserController {
 	/** DI対象 */
 	@Autowired
-	UsersService service;
+	UserService service;
 	@Autowired
 	HttpSession session;
 
