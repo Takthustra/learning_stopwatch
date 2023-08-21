@@ -1,10 +1,10 @@
-package com.example.learning_timer.service;
+package com.example.stopwatch.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.learning_timer.entity.Users;
-import com.example.learning_timer.repository.UsersRepository;
+import com.example.stopwatch.entity.Users;
+import com.example.stopwatch.repository.UsersRepository;
 
 @Service
 public class UsersServiceImpl implements UsersService{

@@ -1,4 +1,4 @@
-package com.example.learning_timer.service;
+package com.example.stopwatch.service;
 
 /** Usersサービス処理:Service */
 public interface UsersService{

@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.learning_timer.repository.UsersRepository;
-import com.example.learning_timer.service.UsersService;
+import com.example.stopwatch.repository.UsersRepository;
+import com.example.stopwatch.service.UsersService;
 
 @SpringBootTest
 class LearningTimerApplicationTests {

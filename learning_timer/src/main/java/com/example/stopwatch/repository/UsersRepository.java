@@ -1,11 +1,11 @@
-package com.example.learning_timer.repository;
+package com.example.stopwatch.repository;
 
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import com.example.learning_timer.entity.Users;
+import com.example.stopwatch.entity.Users;
 
 /** Usersテーブル:RepositoryImpl */
 public interface UsersRepository extends CrudRepository<Users,Integer>{

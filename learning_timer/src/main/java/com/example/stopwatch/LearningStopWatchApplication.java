@@ -1,13 +1,13 @@
-package com.example.learning_timer;
+package com.example.stopwatch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LearningTimerApplication {
+public class LearningStopWatchApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LearningTimerApplication.class, args);
+		SpringApplication.run(LearningStopWatchApplication.class, args);
 	}
 	
 
