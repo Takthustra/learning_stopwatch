@@ -10,7 +10,7 @@ import com.example.learning_stopwatch.repository.UserRepository;
 import com.example.learning_stopwatch.service.UserService;
 
 @SpringBootTest
-class LearningStopwatchApplicationTests {
+class UserTests {
 	@Autowired
 	UserRepository repository;
 	@Autowired
