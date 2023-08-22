@@ -12,4 +12,7 @@ public interface LearningTimeService{
     
     /** 本日のメモの取得 */
     String getTodaysMemo(int userId);
+    
+    /** 指定したユーザの総学習時間の取得 */
+    Time getTotalTime(int userId);
 }

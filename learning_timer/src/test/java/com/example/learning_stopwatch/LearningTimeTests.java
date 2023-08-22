@@ -71,4 +71,16 @@ class LearningTimeTests {
 		
 	}
 
+	@Test
+	public void getTotalTime() {
+		int userId1 = 1;
+		Time time1 = service.getTotalTime(userId1);
+		assertEquals(time1.toString(),"03:03:19");
+
+		int userId2 = 100;
+		Time time2 = service.getTotalTime(userId2);
+		assertEquals(time2.toString(),"00:00:00");
+		
+	}
+
 }

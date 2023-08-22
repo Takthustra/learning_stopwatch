@@ -69,4 +69,14 @@ public class LearningTimeServiceImpl implements LearningTimeService {
 			return dlt.getMemo();
 		}
 	}
+	
+	@Override
+	public Time getTotalTime(int userId){
+		Time time = repository.readTotalTime(userId);
+		//学習時間が存在するか判定
+		if(time == null){
+			return Time.valueOf("00:00:00");
+		}
+			return time;
+	}
 }
