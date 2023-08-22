@@ -9,4 +9,7 @@ public interface LearningTimeService{
     
     /** 本日の学習時間の取得 */
     int getTodaysTime(int userId);
+    
+    /** 本日のメモの取得 */
+    String getTodaysMemo(int userId);
 }

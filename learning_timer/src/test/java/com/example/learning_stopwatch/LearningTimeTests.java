@@ -61,7 +61,7 @@ class LearningTimeTests {
 		int userId = 1;
 		int time = service.getTodaysTime(userId);
 		assertEquals(time,5000);
-	}
+	}	
 	
 
 }

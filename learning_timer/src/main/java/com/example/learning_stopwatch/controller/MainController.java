@@ -24,10 +24,10 @@ public class MainController {
 	LearningTimeService service;
 	@Autowired
 	HttpSession session;
-	
+
 	//フィールド
 	User user;
-	
+
 	/** Formの初期化 */
 	@ModelAttribute
 	public StopwatchForm setUpForm() {
@@ -35,43 +35,44 @@ public class MainController {
 		return form;
 	}
 
-	@GetMapping
-	public String getMain(StopwatchForm form,Model model) {
-		 user = (User) session.getAttribute("user");
+	@GetMapping("stopwatch")
+	public String getMain(StopwatchForm form, Model model) {
+		user = (User) session.getAttribute("user");
 
 		//ログイン時のsessionが生成されているか確認
 		if (user != null) {
-			//本日の学習時間データがあるか確認
+			//本日の学習時間データ取得
 			int time = service.getTodaysTime(user.getId());
-			if(time != 0) {
-				form.setStopTime(time);
-			}
+			form.setStopTime(time);
 			
+			//本日の学習メモ
+			String memo = service.getTodaysMemo(user.getId());
+			form.setMemo(memo);
+			
+
 			return "main/top";
 		} else {
 			return "redirect:/user/login";
 		}
-		
+
 	}
-	
-	@PostMapping
-	public String postMain(StopwatchForm form,Model model) {
+
+	@PostMapping("stopwatch")
+	public String postMain(StopwatchForm form, Model model) {
 		user = (User) session.getAttribute("user");
-		
+
 		//ログイン時のsessionが生成されているか確認
 		if (user != null) {
 			int id = user.getId();
-						
+
 			// DBに保存
-			service.setTodaysData(id,Time.valueOf(form.getTime()),form.getMemo());
-			
+			service.setTodaysData(id, Time.valueOf(form.getTime()), form.getMemo());
+
 			return "main/top";
 		} else {
 			return "redirect:/user/login";
 		}
-		
-		//
-		
+
 	}
-	
+
 }

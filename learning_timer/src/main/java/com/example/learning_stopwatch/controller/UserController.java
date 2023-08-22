@@ -50,7 +50,7 @@ public class UserController {
 		//ログインできたかの判断
 		boolean bool = service.loginUser(form.getName(), form.getPassword());
 		if (bool) {
-			return "redirect:/main";
+			return "redirect:/main/stopwatch";
 
 		} else {
 			result = "ログインできませんでした。";

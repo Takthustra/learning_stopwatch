@@ -57,5 +57,16 @@ public class LearningTimeServiceImpl implements LearningTimeService {
 	        
 	        return time;
 		}
+	
+	}
+	
+	@Override
+	public String getTodaysMemo(int userId) {
+		Daily_Learning_Time dlt = repository.readTodaysData(userId);
+		if(dlt == null) {
+			return null;
+		} else {
+			return dlt.getMemo();
+		}
 	}
 }
