@@ -63,5 +63,12 @@ class LearningTimeTests {
 		assertEquals(time,5000);
 	}	
 	
+	@Test
+	public void readTotalTime() {
+		int userId = 1;
+		Time time = repository.readTotalTime(userId);
+		assertEquals(time.toString(),"03:03:19");
+		
+	}
 
 }
