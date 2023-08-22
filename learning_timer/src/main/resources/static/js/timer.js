@@ -28,7 +28,6 @@ window.addEventListener('load',() => {
 
   	stopwatch.textContent = `${h}:${m}:${s}`;
   	document.querySelector("input[name='time']").value = `${h}:${m}:${s}`;
-		
 	}
 	
 });
@@ -82,6 +81,7 @@ resetButton.addEventListener('click', function() {
   startButton.disabled = false;
   stopButton.disabled = true;
   resetButton.disabled = true;
-  time.textContent = '00:00:00';
+  stopwatch.textContent = '00:00:00';
   stopTime = 0;
+  cur.value = 0;
 });

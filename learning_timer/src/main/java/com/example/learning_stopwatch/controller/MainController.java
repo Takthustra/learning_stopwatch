@@ -41,6 +41,12 @@ public class MainController {
 
 		//ログイン時のsessionが生成されているか確認
 		if (user != null) {
+			//本日の学習時間データがあるか確認
+			int time = service.getTodaysTime(user.getId());
+			if(time != 0) {
+				form.setStopTime(time);
+			}
+			
 			return "main/top";
 		} else {
 			return "redirect:/user/login";
