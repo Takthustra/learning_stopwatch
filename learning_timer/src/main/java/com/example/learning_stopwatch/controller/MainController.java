@@ -36,7 +36,7 @@ public class MainController {
 	}
 
 	@GetMapping
-	public String getMain(Model model) {
+	public String getMain(StopwatchForm form,Model model) {
 		 user = (User) session.getAttribute("user");
 
 		//ログイン時のsessionが生成されているか確認

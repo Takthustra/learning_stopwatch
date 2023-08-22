@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class StopwatchForm {
+	/** 経過時間 */
+	private int stopTime;
     /** 学習時間 */
     private String time;
     /** メモ */

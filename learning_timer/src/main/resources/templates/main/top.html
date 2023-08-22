@@ -25,6 +25,7 @@
 		    </div>
 		  </div>
 		  <script th:src="@{/js/timer.js}"></script>
+		  <input id="stopTime" type="hidden" name="stopTime" th:field="*{stopTime}">
 		  <input id="time" type="hidden" name="time" th:field="*{time}">
 		  <textarea rows="10" cols="50" id="textarea" name="memo" th:field="*{memo}"></textarea>
 		  <input id="save" type="submit" value="save">
