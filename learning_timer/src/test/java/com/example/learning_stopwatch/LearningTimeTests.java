@@ -56,5 +56,12 @@ class LearningTimeTests {
 		assertEquals(dt2.getLearning_time(),Time.valueOf("01:02:03"));
 	}
 	
+	@Test
+	public void getTodayTime() {
+		int userId = 1;
+		int time = service.getTodaysTime(userId);
+		assertEquals(time,5000);
+	}
+	
 
 }

@@ -30,4 +30,32 @@ public class LearningTimeServiceImpl implements LearningTimeService {
 			repository.updateTodaysData(userId, time, memo);
 		}
 	}
+	
+	@Override
+	public int getTodaysTime(int userId) {
+		Daily_Learning_Time dlt = repository.readTodaysData(userId);
+		if (dlt == null) {
+			//生成されていなければ0を返す
+			return 0;
+		} else {
+			//生成されていれば学習時間をミリ秒単位で返す
+			Time tmp = dlt.getLearning_time();
+	        String str = tmp.toString();
+	        String[] strs = str.split(":");
+	        int time = 0;
+	        
+	        for(int i=0;i<=2;i++){
+	            if(i==0){
+	                time += Integer.parseInt(strs[0])*60*60;
+	            }else if(i==1){
+	                time += Integer.parseInt(strs[1])*60;
+	            }else if(i==2){
+	                time += Integer.parseInt(strs[2]);
+	                time = time*1000;
+	            }
+	        }
+	        
+	        return time;
+		}
+	}
 }
