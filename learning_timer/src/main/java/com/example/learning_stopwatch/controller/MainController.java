@@ -1,15 +1,18 @@
 package com.example.learning_stopwatch.controller;
 
+import java.sql.Time;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.learning_stopwatch.entity.User;
-import com.example.learning_stopwatch.form.UserForm;
-import com.example.learning_stopwatch.service.UserService;
+import com.example.learning_stopwatch.form.StopwatchForm;
+import com.example.learning_stopwatch.service.LearningTimeService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -18,13 +21,23 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
 	/** DI対象 */
 	@Autowired
-	UserService service;
+	LearningTimeService service;
 	@Autowired
 	HttpSession session;
+	
+	//フィールド
+	User user;
+	
+	/** Formの初期化 */
+	@ModelAttribute
+	public StopwatchForm setUpForm() {
+		StopwatchForm form = new StopwatchForm();
+		return form;
+	}
 
 	@GetMapping
-	public String getMain(UserForm form, Model model) {
-		User user = (User) session.getAttribute("user");
+	public String getMain(Model model) {
+		 user = (User) session.getAttribute("user");
 
 		//ログイン時のsessionが生成されているか確認
 		if (user != null) {
@@ -36,17 +49,22 @@ public class MainController {
 	}
 	
 	@PostMapping
-	public String postMain(UserForm form, Model model) {
-		String name = (String) session.getAttribute("name");
-		
-		System.out.println("ポストされました");
+	public String postMain(StopwatchForm form,Model model) {
+		user = (User) session.getAttribute("user");
 		
 		//ログイン時のsessionが生成されているか確認
-		if (name != null) {
-			return "main";
+		if (user != null) {
+			int id = user.getId();
+						
+			// DBに保存
+			service.setTodaysData(id,Time.valueOf(form.getTime()),form.getMemo());
+			
+			return "main/top";
 		} else {
 			return "redirect:/user/login";
 		}
+		
+		//
 		
 	}
 	
