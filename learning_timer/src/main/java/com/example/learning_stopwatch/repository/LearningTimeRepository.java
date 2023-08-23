@@ -1,6 +1,7 @@
 package com.example.learning_stopwatch.repository;
 
 import java.sql.Time;
+import java.util.List;
 
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
@@ -28,4 +29,9 @@ public interface LearningTimeRepository extends CrudRepository<Daily_Learning_Ti
 	//指定したユーザの総学習時間の取得
 	@Query("select sec_to_time(sum(time_to_sec(learning_time))) as total_learning_time from daily_learning_time where user_id = :userId;")
 	Time readTotalTime(@Param("userId") int userId);
+	
+	//指定したユーザの全学習記録を取得
+	@Query("select * from daily_learning_time where user_id = 1;")
+	List<Daily_Learning_Time> readAllData(@Param("userId") int userId);
+	
 }

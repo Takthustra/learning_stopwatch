@@ -3,6 +3,7 @@ package com.example.learning_stopwatch;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Time;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,16 @@ class LearningTimeTests {
 		Time time2 = service.getTotalTime(userId2);
 		assertEquals(time2.toString(),"00:00:00");
 		
+	}
+	
+	@Test
+	public void readAllData() {
+		int userId = 1;
+		List<Daily_Learning_Time> times = repository.readAllData(userId);
+		Daily_Learning_Time time1 = times.get(0);
+		Daily_Learning_Time time2 = times.get(1);
+		assertEquals(time1.getLearning_time().toString(),"03:03:03");
+		assertEquals(time2.getLearning_time().toString(),"00:00:16");
 	}
 
 }
