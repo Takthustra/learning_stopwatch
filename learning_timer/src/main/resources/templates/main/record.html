@@ -11,6 +11,11 @@
          <p th:text="|ユーザ名:*{name}|"></p>
          <p th:text="|作成日時:*{created_at}|"></p> 
          <p th:text="|総学習時間:*{totalTime}|" ></p>
+         <div th:each="dlt : *{dlts}">
+			 <p th:text="|日時:【${dlt.date}】学習時間:【${dlt.learning_time}】メモ:【${dlt.memo}】|">
+				 
+			 </p>
+         </div>
         </form>
         <!-- △△　学習記録を表示　△△ -->
     </body>

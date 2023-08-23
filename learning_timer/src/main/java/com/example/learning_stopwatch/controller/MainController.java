@@ -2,6 +2,7 @@ package com.example.learning_stopwatch.controller;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,9 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.learning_stopwatch.entity.Daily_Learning_Time;
 import com.example.learning_stopwatch.entity.User;
-import com.example.learning_stopwatch.form.StopwatchForm;
 import com.example.learning_stopwatch.form.RecordForm;
+import com.example.learning_stopwatch.form.StopwatchForm;
 import com.example.learning_stopwatch.service.LearningTimeService;
 
 import jakarta.servlet.http.HttpSession;
@@ -84,13 +86,14 @@ public class MainController {
 			String name = user.getName();
 			Timestamp created_at = user.getCreated_at();
 			Time totalTime =  service.getTotalTime(id);
-
+			 List<Daily_Learning_Time> dlts = service.getAllData(id);
 			
 			
 			// formのフィールドにセット
 			form.setName(name);
 			form.setCreated_at(created_at);
 			form.setTotalTime(totalTime);
+			form.setDlts(dlts);
 
 			return "main/record";
 		} else {
