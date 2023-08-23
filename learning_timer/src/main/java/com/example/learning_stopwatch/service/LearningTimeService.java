@@ -1,6 +1,9 @@
 package com.example.learning_stopwatch.service;
 
 import java.sql.Time;
+import java.util.List;
+
+import com.example.learning_stopwatch.entity.Daily_Learning_Time;
 
 /** Usersサービス処理:Service */
 public interface LearningTimeService{
@@ -15,4 +18,7 @@ public interface LearningTimeService{
     
     /** 指定したユーザの総学習時間の取得 */
     Time getTotalTime(int userId);
+    
+    /** 指定したユーザの全学習記録を取得 */
+    List<Daily_Learning_Time> getAllData(int userId);
 }

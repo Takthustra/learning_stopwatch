@@ -93,5 +93,15 @@ class LearningTimeTests {
 		assertEquals(time1.getLearning_time().toString(),"03:03:03");
 		assertEquals(time2.getLearning_time().toString(),"00:00:16");
 	}
+	
+	@Test
+	public void getAllData() {
+		int userId = 1;
+		List<Daily_Learning_Time> times = service.getAllData(userId);
+		Daily_Learning_Time time1 = times.get(0);
+		Daily_Learning_Time time2 = times.get(1);
+		assertEquals(time1.getLearning_time().toString(),"03:03:03");
+		assertEquals(time2.getLearning_time().toString(),"00:00:16");
+	}
 
 }
