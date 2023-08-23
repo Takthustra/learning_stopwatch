@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>学習記録</title>
+    </head>
+    <body>
+        <h1>学習記録</h1>
+		<!--▽▽　学習記録を表示　▽▽-->
+        <form th:object="${recordForm}">
+         <p th:text="|ユーザ名:*{name}|"></p>
+         <p th:text="|作成日時:*{created_at}|"></p> 
+         <p th:text="|総学習時間:*{totalTime}|" ></p>
+        </form>
+        <!-- △△　学習記録を表示　△△ -->
+    </body>
+</html>

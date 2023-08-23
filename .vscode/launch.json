@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "LearningStopwatchApplication",
+            "request": "launch",
+            "mainClass": "com.example.learning_stopwatch.LearningStopwatchApplication",
+            "projectName": "learning_timer"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-LearningTimerApplication<learning_timer>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

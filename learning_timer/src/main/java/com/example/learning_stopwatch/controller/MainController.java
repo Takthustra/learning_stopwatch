@@ -1,6 +1,7 @@
 package com.example.learning_stopwatch.controller;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.learning_stopwatch.entity.User;
 import com.example.learning_stopwatch.form.StopwatchForm;
+import com.example.learning_stopwatch.form.recordForm;
 import com.example.learning_stopwatch.service.LearningTimeService;
 
 import jakarta.servlet.http.HttpSession;
@@ -59,8 +61,6 @@ public class MainController {
 
 	@PostMapping("stopwatch")
 	public String postMain(StopwatchForm form, Model model) {
-		user = (User) session.getAttribute("user");
-
 		//ログイン時のsessionが生成されているか確認
 		if (user != null) {
 			int id = user.getId();
@@ -75,4 +75,26 @@ public class MainController {
 
 	}
 
+	@GetMapping("record")
+	public String getRecord(recordForm form){
+		//ログイン時のsessionが生成されているか確認
+		if (user != null) {
+			//学習記録の各種データを取得
+			int id = user.getId();
+			String name = user.getName();
+			Timestamp created_at = user.getCreated_at();
+			Time totalTime =  service.getTotalTime(id);
+
+			
+			
+			// formのフィールドにセット
+			form.setName(name);
+			form.setCreated_at(created_at);
+			form.setTotalTime(totalTime);
+
+			return "main/record";
+		} else {
+			return "redirect:/user/login";
+		}
+	}
 }
