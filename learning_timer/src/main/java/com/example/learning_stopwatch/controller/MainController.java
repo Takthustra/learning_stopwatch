@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.learning_stopwatch.entity.User;
 import com.example.learning_stopwatch.form.StopwatchForm;
-import com.example.learning_stopwatch.form.recordForm;
+import com.example.learning_stopwatch.form.RecordForm;
 import com.example.learning_stopwatch.service.LearningTimeService;
 
 import jakarta.servlet.http.HttpSession;
@@ -76,7 +76,7 @@ public class MainController {
 	}
 
 	@GetMapping("record")
-	public String getRecord(recordForm form){
+	public String getRecord(RecordForm form){
 		//ログイン時のsessionが生成されているか確認
 		if (user != null) {
 			//学習記録の各種データを取得
