@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 /** Userコントローラ */
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.learning_stopwatch.entity.User;
 import com.example.learning_stopwatch.form.UserForm;
@@ -129,36 +130,96 @@ public class UserController {
 
 	@GetMapping("delete")
 	public String getDelete(Model model) {
-		
+
 		//ログイン時のsessionが生成されているか確認
 		user = (User) session.getAttribute("user");
 		if (user == null) {
 			return "redirect:login";
 		}
-		
+
 		//deleteページで条件分岐させるためにビューへ受け渡し
-		model.addAttribute("boolean",false);
+		model.addAttribute("boolean", false);
 
 		return "user/delete";
 	}
 
 	@PostMapping("delete")
 	public String postDelete(Model model) {
-		
+
 		//ログイン時のsessionが生成されているか確認
 		user = (User) session.getAttribute("user");
 		if (user == null) {
 			return "redirect:login";
 		}
-		
+
 		service.deleteUser(user);
 		user = null;
 		session.removeAttribute("user");
-		
+
 		//deleteページで条件分岐させるためにビューへ受け渡し
-		model.addAttribute("boolean",true);
+		model.addAttribute("boolean", true);
 
 		return "user/delete";
+	}
+
+	/*
+	 * パスワード更新処理
+	 */
+
+	@GetMapping("update_password")
+	public String getUpdatePassword(Model model) {
+
+		//ログイン時のsessionが生成されているか確認
+		user = (User) session.getAttribute("user");
+		if (user == null) {
+			return "redirect:login";
+		}
+
+		return "user/update_password";
+	}
+
+	@PostMapping("update_password")
+	public String postUpdatePassword(
+			Model model,
+			@RequestParam String oldPassword,
+			@RequestParam String newPassword,
+			@RequestParam String checkPassword) {
+
+		//ログイン時のsessionが生成されているか確認
+		user = (User) session.getAttribute("user");
+		if (user == null) {
+			return "redirect:login";
+		}
+
+		String result;
+		String userName = user.getName();
+		String currentPassword = user.getPassword();
+
+		if (!oldPassword.equals(currentPassword)) {
+
+			//登録されているパスワードと現在のパスワードの照合
+			result = "登録されているパスワードと現在のパスワードが一致しません。";
+
+		} else if (!newPassword.equals(checkPassword)) {
+
+			//新しいパスワードと確認用パスワードの照合
+			result = "新しいパスワードと確認用パスワードが一致しません。";
+
+		}else if(oldPassword.equals(newPassword)) {
+			
+			//登録されているパスワードと新しいパスワードが同じ場合
+			result = "現在のパスワードと新しいパスワードが同じです。";
+			
+		}else {
+
+			//パスワード変更処理
+			service.updatePassword(userName, newPassword);
+			result = "変更しました";
+
+		}
+
+		model.addAttribute("result", result);
+		return "user/update_password";
 	}
 
 }

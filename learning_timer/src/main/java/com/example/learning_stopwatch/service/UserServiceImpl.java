@@ -49,8 +49,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void updatePassword(String name,String password){
-
+    	repository.updatePassword(name,password);
     }
+    
+    
 
     @Override
     public void deleteUser(User user) {

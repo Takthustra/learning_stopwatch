@@ -9,7 +9,7 @@ public interface UserService{
     /** 特定のユーザでログインします */
     boolean loginUser(String name,String password);
     /** ユーザのパスワードを変更します */
-    boolean updatePassword(String name,String password);
+    void updatePassword(String name,String password);
     /** ユーザを削除します */
     void deleteUser(User user);
 }
