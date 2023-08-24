@@ -77,9 +77,9 @@ public class MainController {
 		}
 
 	}
-
-	@GetMapping("record")
-	public String getRecord(RecordForm form){
+	
+	@GetMapping("mypage")
+	public String getMypage(RecordForm form){
 		//ログイン時のsessionが生成されているか確認
 		if (user != null) {
 			//学習記録の各種データを取得
@@ -89,16 +89,17 @@ public class MainController {
 			Time totalTime =  service.getTotalTime(id);
 			 List<Daily_Learning_Time> dlts = service.getAllData(id);
 			
-			
 			// formのフィールドにセット
 			form.setName(name);
 			form.setCreated_at(created_at);
 			form.setTotalTime(totalTime);
 			form.setDlts(dlts);
 
-			return "main/record";
+			return "main/mypage";
 		} else {
 			return "redirect:/user/login";
 		}
 	}
+
+	
 }
