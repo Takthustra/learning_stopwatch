@@ -26,6 +26,9 @@ public class UserController {
 	@Autowired
 	HttpSession session;
 
+	/** フィールド */
+	User user;
+
 	/** Formの初期化 */
 	@ModelAttribute
 	public UserForm setUpForm() {
@@ -43,7 +46,7 @@ public class UserController {
 	public String getLogin(UserForm form, Model model) {
 
 		//ログイン時のsessionが生成されているか確認
-		User user = (User) session.getAttribute("user");
+		user = (User) session.getAttribute("user");
 		if (user != null) {
 			form.setName(user.getName());
 			form.setPassword(user.getPassword());
@@ -78,7 +81,6 @@ public class UserController {
 	/*
 	 * 
 	 * ユーザ作成処理
-	 * 
 	 */
 
 	@GetMapping("create")
@@ -113,5 +115,13 @@ public class UserController {
 	/*
 	 * ユーザパスワード変更処理
 	 */
+	
+	@GetMapping("logout")
+	public String getLogout() {
+		session.removeAttribute("user");
+		user = null;
+		
+		return "redirect:login";
+	}
 
 }
