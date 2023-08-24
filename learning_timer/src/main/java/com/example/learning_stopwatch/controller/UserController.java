@@ -109,19 +109,56 @@ public class UserController {
 
 		model.addAttribute("result", result);
 		return "user/create";
-
 	}
 
 	/*
-	 * ユーザパスワード変更処理
+	 * ログアウト処理
 	 */
-	
+
 	@GetMapping("logout")
 	public String getLogout() {
 		session.removeAttribute("user");
 		user = null;
-		
+
 		return "redirect:login";
+	}
+
+	/*
+	 * ユーザアカウント削除処理
+	 */
+
+	@GetMapping("delete")
+	public String getDelete(Model model) {
+		
+		//ログイン時のsessionが生成されているか確認
+		user = (User) session.getAttribute("user");
+		if (user == null) {
+			return "redirect:login";
+		}
+		
+		//deleteページで条件分岐させるためにビューへ受け渡し
+		model.addAttribute("boolean",false);
+
+		return "user/delete";
+	}
+
+	@PostMapping("delete")
+	public String postDelete(Model model) {
+		
+		//ログイン時のsessionが生成されているか確認
+		user = (User) session.getAttribute("user");
+		if (user == null) {
+			return "redirect:login";
+		}
+		
+		service.deleteUser(user);
+		user = null;
+		session.removeAttribute("user");
+		
+		//deleteページで条件分岐させるためにビューへ受け渡し
+		model.addAttribute("boolean",true);
+
+		return "user/delete";
 	}
 
 }

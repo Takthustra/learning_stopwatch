@@ -1,5 +1,7 @@
 package com.example.learning_stopwatch.service;
 
+import com.example.learning_stopwatch.entity.User;
+
 /** Usersサービス処理:Service */
 public interface UserService{
     /** ユーザを登録します */
@@ -7,7 +9,7 @@ public interface UserService{
     /** 特定のユーザでログインします */
     boolean loginUser(String name,String password);
     /** ユーザのパスワードを変更します */
-    void updatePassword(String name,String password);
+    boolean updatePassword(String name,String password);
     /** ユーザを削除します */
-    void deleteUser(String name,String password);
+    void deleteUser(User user);
 }

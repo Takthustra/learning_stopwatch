@@ -25,8 +25,4 @@ public interface UserRepository extends CrudRepository<User,Integer>{
 	//パスワード変更
 	@Query("update user set password = :password where name = :name")
 	void updatePassword(@Param("name") String name,@Param("password") String password);
-
-	//ユーザ削除
-	@Query("delete user where name = :name and password = :password")
-	void deleteUser(@Param("name") String name,@Param("password") String password);
 }

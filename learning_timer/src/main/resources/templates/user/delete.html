@@ -1,0 +1,22 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title th:text="ユーザ削除"></title>
+    </head>
+    <body>
+        <h1 th:text="ユーザ削除"></h1>
+        <div th:if="${boolean} == false">
+	        <h3 th:text="ユーザを削除しても良いですか"></h3>
+			<!--▽▽　Formを表示　▽▽-->
+	         <form method="post" th:action="@{delete}">  
+	         <input type="submit" th:value="ユーザを削除">
+	         <button type="button" onclick="history.back()" th:text="戻る"></button>
+	         </form>  
+        </div>
+        <div th:if="${boolean} == true">
+	        <h3 th:text="ユーザを削除しました。"></h3>
+	        <a th:href="@{login}" th:text="ログインページへ"></a>
+        </div>
+    </body>
+</html>
