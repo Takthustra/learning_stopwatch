@@ -31,7 +31,7 @@ public interface LearningTimeRepository extends CrudRepository<Daily_Learning_Ti
 	Time readTotalTime(@Param("userId") int userId);
 	
 	//指定したユーザの全学習記録を取得
-	@Query("select * from daily_learning_time where user_id = 1;")
+	@Query("select * from daily_learning_time where user_id = :userId;")
 	List<Daily_Learning_Time> readAllData(@Param("userId") int userId);
 	
 }
