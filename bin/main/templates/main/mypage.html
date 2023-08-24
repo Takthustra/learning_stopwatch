@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>マイページ</title>
+    </head>
+    <body>
+        <h1>マイページ</h1>
+		<!--▽▽　学習記録を表示　▽▽-->
+        <form th:object="${recordForm}">
+         <p th:text="|ユーザ名:*{name}|"></p>
+         <p th:text="|作成日時:*{created_at}|"></p> 
+         <p th:text="|総学習時間:*{totalTime}|" ></p>
+         <div th:each="dlt : *{dlts}">
+			 <p th:text="|日時:【${dlt.date}】学習時間:【${dlt.learning_time}】メモ:【${dlt.memo}】|">
+				 
+			 </p>
+         </div>
+        </form>
+        <!-- △△　学習記録を表示　△△ -->
+        <a th:href="@{/user/logout}" th:text="ログアウトする"></a>
+        <a th:href="@{/user/delete}" th:text="アカウントを削除"></a>
+        <a th:href="@{/user/update_password}" th:text="パスワード変更"></a>
+    </body>
+</html>

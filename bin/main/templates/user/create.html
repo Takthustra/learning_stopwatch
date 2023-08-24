@@ -1,0 +1,35 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>ユーザ作成</title>
+    </head>
+    <body>
+        <h1>ユーザ作成</h1>
+        <h3>ユーザ登録フォーム</h3>
+		<!--▽▽　Formを表示　▽▽-->
+         <form method="post" th:action="@{create}" th:object="${userForm}"> 
+			 
+         <label>ユーザ名:</label><input type="text" th:field="*{name}"><br> 
+         <label>パスワード:</label><input type="text" th:field="*{password}"><br> 
+
+         <input type="submit" value="登録"> 
+         <!--△△　Formを表示　△△-->
+         
+         <!--▽▽ エラーを表示する ▽▽-->
+         <ul th:if="${#fields.hasErrors('*')}">
+			 <li th:each="err:${#fields.errors('*')}" th:text="${err}">
+				 
+			 </li>
+		 </ul>
+		 <!--△△ エラーを表示する △△-->
+		 <!--▽▽ 登録結果を表示する ▽▽-->
+         <th:block th:if="${result}">
+			 <p th:text="${result}"></p>
+         </th>
+         <!--△△ 登録結果を表示する △△-->
+         
+         </form>  
+         <a th:href="@{login}">ログイン</a>
+    </body>
+</html>
