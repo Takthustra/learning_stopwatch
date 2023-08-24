@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 /** Userコントローラ */
 
+import com.example.learning_stopwatch.entity.User;
 import com.example.learning_stopwatch.form.UserForm;
 import com.example.learning_stopwatch.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("user")
@@ -20,6 +23,8 @@ public class UserController {
 	/** DI対象 */
 	@Autowired
 	UserService service;
+	@Autowired
+	HttpSession session;
 
 	/** Formの初期化 */
 	@ModelAttribute
@@ -27,15 +32,26 @@ public class UserController {
 		UserForm form = new UserForm();
 		return form;
 	}
-	
+
 	/*
+	 * 
 	 * ログイン処理
+	 * 
 	 */
-	
+
 	@GetMapping("login")
 	public String getLogin(UserForm form, Model model) {
 
-		return "user/login";
+		//ログイン時のsessionが生成されているか確認
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
+			form.setName(user.getName());
+			form.setPassword(user.getPassword());
+
+			return "user/login";
+		} else {
+			return "user/login";
+		}
 	}
 
 	@PostMapping("login")
@@ -58,9 +74,11 @@ public class UserController {
 		model.addAttribute("result", result);
 		return "user/login";
 	}
-	
+
 	/*
+	 * 
 	 * ユーザ作成処理
+	 * 
 	 */
 
 	@GetMapping("create")
@@ -91,11 +109,9 @@ public class UserController {
 		return "user/create";
 
 	}
-	
+
 	/*
 	 * ユーザパスワード変更処理
 	 */
-	
-	
 
 }

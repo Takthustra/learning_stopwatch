@@ -22,6 +22,10 @@ public class UserServiceImpl implements UserService{
         String str = repository.uniqueUser(name);
         if(str == null){
             repository.createUser(name, password);
+            
+            //作成と同時にセッションにUser情報を保存
+            loginUser(name,password);
+            
             return true;
         }else{
             return false;

@@ -13,7 +13,7 @@
          <label>ユーザ名:</label><input type="text" th:field="*{name}"><br> 
          <label>パスワード:</label><input type="text" th:field="*{password}"><br> 
 
-         <input type="submit" value="送信"> 
+         <input type="submit" value="登録"> 
          <!--△△　Formを表示　△△-->
          
          <!--▽▽ エラーを表示する ▽▽-->
@@ -30,5 +30,6 @@
          <!--△△ 登録結果を表示する △△-->
          
          </form>  
+         <a th:href="@{login}">ログイン</a>
     </body>
 </html>

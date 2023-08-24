@@ -9,8 +9,9 @@
 	<!--▽▽　ログインフォームを表示　▽▽-->
      <form method="post" th:action="@{login}" th:object="${userForm}"> 
 		 
-     <label>ユーザ名:</label><input type="text" th:field="*{name}"><br> 
-     <label>パスワード:</label><input type="text" th:field="*{password}"><br> 
+		 
+     <label>ユーザ名:</label><input type="text" th:field="*{name}" th:value="*{name}" ><br> 
+     <label>パスワード:</label><input type="text" th:field="*{password}" th:value="*{password}"><br> 
 
      <input type="submit" value="ログイン"><br>
      <!--△△　ログインフォームを表示　△△-->
@@ -27,7 +28,7 @@
 		 <p th:text="${result}"></p>
      </th><br>
      <!--△△ 登録結果を表示する △△-->
-	<a th:href="@{create}">新規登録はこちら</a>
 	</form>
+	<a th:href="@{create}">新規登録</a>
 </body>
 </html>

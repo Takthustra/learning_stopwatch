@@ -41,9 +41,10 @@ public class MainController {
 
 	@GetMapping("stopwatch")
 	public String getMain(StopwatchForm form, Model model) {
-		user = (User) session.getAttribute("user");
 
 		//ログイン時のsessionが生成されているか確認
+		user = (User) session.getAttribute("user");
+		
 		if (user != null) {
 			//本日の学習時間データ取得
 			int time = service.getTodaysTime(user.getId());
