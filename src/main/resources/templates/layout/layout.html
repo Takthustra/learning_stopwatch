@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org"
+<html lang="ja" class="h-100"
+	　xmlns="http://www.thymeleaf.org"
       xmlns="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset='utf-8'>
 <title>LearningStopwatch</title>
 </head>
-<body>
+
+<body class="h-100 vstack">
 	<!--共通ヘッダ-->
 	<header>
 		
@@ -13,10 +15,41 @@
 	<!--共通ヘッダ-->
 	
 	<!--共通ナビゲーション-->
-	<nav>
-		<a th:href="{main/stopwatch}" th:text="ストップウォッチ"></a>
-		<a th:href="{main/mypage}" th:text="マイページ"></a>
-	</nav>
+        <nav class="navbar navbar-dark bg-dark bg-gradient fixed-top" id="navbar">
+            <div class="container">
+                <a class="navbar-brand" th:href="@{/}">
+                    <i class="bi bi-stopwatch">
+                    </i>
+                    LearningStopwatch
+                </a>
+                
+                <!-- トグルボタン -->
+                <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- リンク一覧 -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" th:href="@{/}" th:text="ホーム"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{main/stopwatch}" th:text="ストップウォッチ"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{main/mypage}" th:text="マイページ"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>           
+        </nav>
 	<!--共通ナビゲーション-->
 	
 	<!--置き換え場所-->
@@ -26,9 +59,14 @@
 	<!--置き換え場所-->
 	
 	<!--共通フッタ-->
-	<footer>
-		
-	</footer>
+
+  <footer class="mt-auto py-2 bg-dark bg-gradient">
+    <div class="container text-center">
+      ©2023 Takthustra
+    </div>
+  </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 	<!--共通フッタ-->
 </body>
 </html>
