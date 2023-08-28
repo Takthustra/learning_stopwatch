@@ -38,9 +38,22 @@
                                     <label for="floatingPassword" class="small">パスワード  </label>
                                 </div>
                                 
+                                <div class="mt-2">						
+									<!-- エラー表示 -->
+	                                <ul class="alert alert-primary small" role="alert" th:if="${#fields.hasErrors('*')}">
+	                                    <li th:each="err:${#fields.errors('*')}" th:text="${err}">
+	                                    </li>
+	                                </ul>
+	
+	                                <!-- ログイン結果 -->
+	                                
+	                                <div class="alert alert-primary small" role="alert" th:if="${result}" th:text="${result}">
+	                                </div>	
+								</div>
+                                
                                 <div class="hstack align-items-end">
                                     <div class="mt-4">
-                                        <button class="btn btn-dark btn-gradient rounded-pill px-5">Login</button>
+                                        <button type="submit" class="btn btn-dark btn-gradient rounded-pill px-5">Login</button>
                                     </div>
                                     <div class="mx-2">
                                         初めての方は、<a th:href="@{create}">新規登録</a>
@@ -48,18 +61,7 @@
                                 </div>
                                     
                             
-                                <!-- エラー表示 -->
-                                <th:block th:if="${#fields.hasErrors('*')}">
-                                    <ul th:if="${#fields.hasErrors('*')}">
-                                        <li th:each="err:${#fields.errors('*')}" th:text="${err}">
-                                        </li>
-                                    </ul>
-                                </th:block>
 
-                                <!-- ログイン結果 -->
-                                <th:block th:if="${result}">
-                                    <p th:text="${result}"></p>
-                                </th>
 
                             </form>
                             
