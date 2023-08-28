@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-/** Userコントローラ */
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.learning_stopwatch.entity.User;
+import com.example.learning_stopwatch.form.UpdatePasswordForm;
 import com.example.learning_stopwatch.form.UserForm;
 import com.example.learning_stopwatch.service.UserService;
 
@@ -32,8 +31,13 @@ public class UserController {
 
 	/** Formの初期化 */
 	@ModelAttribute
-	public UserForm setUpForm() {
+	public UserForm setUpUserForm() {
 		UserForm form = new UserForm();
+		return form;
+	}
+	@ModelAttribute
+	public UpdatePasswordForm setUpUpdatePasswordForm() {
+		UpdatePasswordForm form = new UpdatePasswordForm();
 		return form;
 	}
 
@@ -167,7 +171,7 @@ public class UserController {
 	 */
 
 	@GetMapping("update_password")
-	public String getUpdatePassword(Model model) {
+	public String getUpdatePassword(UpdatePasswordForm form, Model model) {
 
 		//ログイン時のsessionが生成されているか確認
 		user = (User) session.getAttribute("user");
@@ -179,33 +183,40 @@ public class UserController {
 	}
 
 	@PostMapping("update_password")
-	public String postUpdatePassword(
-			Model model,
-			@RequestParam String oldPassword,
-			@RequestParam String newPassword,
-			@RequestParam String checkPassword) {
-
+	public String postUpdatePassword(@Validated UpdatePasswordForm form, BindingResult bindingResult, Model model) {
+		
 		//ログイン時のsessionが生成されているか確認
 		user = (User) session.getAttribute("user");
 		if (user == null) {
 			return "redirect:login";
 		}
+		
+		if (bindingResult.hasErrors()) {
+			//パスワード更新画面へ戻る
+			return "user/update_password";
+		}
 
 		String result;
 		String userName = user.getName();
 		String currentPassword = user.getPassword();
-
+		
+		//formのデータを抽出
+		String oldPassword = form.getOldPassword();
+		String newPassword = form.getNewPassword();
+		String checkPassword = form.getCheckPassword();
+		
+		
 		if (!oldPassword.equals(currentPassword)) {
 
 			//登録されているパスワードと現在のパスワードの照合
-			result = "登録されているパスワードと現在のパスワードが一致しません。";
+			result = "登録されているパスワードと入力された現在のパスワードが一致しません。";
 
-		} else if (!newPassword.equals(checkPassword)) {
+		} else if (!newPassword.equals(form.getCheckPassword())) {
 
 			//新しいパスワードと確認用パスワードの照合
 			result = "新しいパスワードと確認用パスワードが一致しません。";
 
-		}else if(oldPassword.equals(newPassword)) {
+		}else if(oldPassword.equals(form.getNewPassword())) {
 			
 			//登録されているパスワードと新しいパスワードが同じ場合
 			result = "現在のパスワードと新しいパスワードが同じです。";
@@ -213,7 +224,9 @@ public class UserController {
 		}else {
 
 			//パスワード変更処理
-			service.updatePassword(userName, newPassword);
+			service.updatePassword(userName, form.getNewPassword());
+			//内部的に再度ログイン処理（Sessionを更新するため）
+			service.loginUser(user.getName(), form.getNewPassword());
 			result = "変更しました";
 
 		}
