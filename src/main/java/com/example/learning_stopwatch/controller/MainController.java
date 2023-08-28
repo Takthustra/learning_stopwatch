@@ -55,7 +55,7 @@ public class MainController {
 			form.setMemo(memo);
 			
 
-			return "main/top";
+			return "main/stopwatch";
 		} else {
 			return "redirect:/user/login";
 		}
@@ -71,7 +71,7 @@ public class MainController {
 			// DBに保存
 			service.setTodaysData(id, Time.valueOf(form.getTime()), form.getMemo());
 
-			return "main/top";
+			return "main/stopwatch";
 		} else {
 			return "redirect:/user/login";
 		}
