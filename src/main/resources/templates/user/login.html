@@ -1,34 +1,72 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>ログイン</title>
-</head>
-<body>
-	<h1>ログインフォーム</h1>
-	<!--▽▽　ログインフォームを表示　▽▽-->
-     <form method="post" th:action="@{login}" th:object="${userForm}"> 
-		 
-		 
-     <label>ユーザ名:</label><input type="text" th:field="*{name}" th:value="*{name}" ><br> 
-     <label>パスワード:</label><input type="text" th:field="*{password}" th:value="*{password}"><br> 
+<html lang="ja" class="h-100"
+	　xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+    <head>
+        <!-- meta -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
 
-     <input type="submit" value="ログイン"><br>
-     <!--△△　ログインフォームを表示　△△-->
-     
-     <!--▽▽ エラーを表示する ▽▽-->
-     <ul th:if="${#fields.hasErrors('*')}">
-		 <li th:each="err:${#fields.errors('*')}" th:text="${err}">
-			 
-		 </li>
-	 </ul><br>
-	 <!--△△ エラーを表示する △△-->
-	 <!--▽▽ ログイン結果を表示する ▽▽-->
-     <th:block th:if="${result}">
-		 <p th:text="${result}"></p>
-     </th><br>
-     <!--△△ ログイン結果を表示する △△-->
-	</form>
-	<a th:href="@{create}">新規登録</a>
+        <!-- Bootstrap CSS -->
+        <link href ="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel ="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+        <!-- Bootstrap Icons CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" integrity="sha256-PDJQdTN7dolQWDASIoBVrjkuOEaI137FI15sqI3Oxu8=" crossorigin="anonymous">
+        <title>Login</title>
+    </head>
+<body>
+	<section layout:fragment="context" id="home" style="padding: 80px 0 50px">
+            <div class="container py-3">
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+                        <h2>ログイン</h2>
+                    </div>
+                </div>
+
+                    <!-- フォーム -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 py-3">
+                            <form method="post" th:action="@{login}" th:object="${userForm}">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingUser" th:field="*{name}" th:value="*{name}" >
+                                    <label for="floatingUser" class="small">ユーザ名</label>
+                                </div>      
+                                
+                                <div class="form-floating mt-3">
+                                    <input type="password" class="form-control" id="floatingPassword" th:field="*{password}" th:value="*{password}">
+                                    <label for="floatingPassword" class="small">パスワード  </label>
+                                </div>
+                                
+                                <div class="hstack align-items-end">
+                                    <div class="mt-4">
+                                        <button class="btn btn-dark btn-gradient rounded-pill px-5">Login</button>
+                                    </div>
+                                    <div class="mx-2">
+                                        初めての方は、<a th:href="@{create}">新規登録</a>
+                                    </div>
+                                </div>
+                                    
+                            
+                                <!-- エラー表示 -->
+                                <th:block th:if="${#fields.hasErrors('*')}">
+                                    <ul th:if="${#fields.hasErrors('*')}">
+                                        <li th:each="err:${#fields.errors('*')}" th:text="${err}">
+                                        </li>
+                                    </ul>
+                                </th:block>
+
+                                <!-- ログイン結果 -->
+                                <th:block th:if="${result}">
+                                    <p th:text="${result}"></p>
+                                </th>
+
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 </body>
 </html>

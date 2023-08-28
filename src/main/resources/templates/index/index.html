@@ -18,7 +18,7 @@
     <body>
         <!--コンテンツ-->
 
-        <section layout:fragment="context" class="" id="home" style="padding: 80px 0 50px">
+        <section layout:fragment="context" id="home" style="padding: 80px 0 50px">
             <div class="container py-3">
                 <div class="row align-items-center justify-content-center">
 
@@ -30,7 +30,7 @@
 		                <p th:text="さぁ、今から始めよう。"></p>
 	                </div>
                     <div class="hstack">
-                        <a href="#contactUs" class="btn btn-dark px-5 shadow">
+                        <a th:href="@{user/create}" class="btn btn-dark px-5 shadow">
                             ユーザ作成
                         </a>
                         <div class="small" style="margin-top: 1rem; margin-left: 1rem;">
