@@ -1,35 +1,71 @@
 	<!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org">
+<html lang="ja" class="h-100"
+	　xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
     <head>
-        <meta charset="UTF-8">
-        <title>ユーザ作成</title>
+        <!-- meta -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href ="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel ="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+        <!-- Bootstrap Icons CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" integrity="sha256-PDJQdTN7dolQWDASIoBVrjkuOEaI137FI15sqI3Oxu8=" crossorigin="anonymous">
+        <title>CreateUser</title>
     </head>
     <body>
-        <h1>ユーザ作成</h1>
-        <h3>ユーザ登録フォーム</h3>
-		<!--▽▽　Formを表示　▽▽-->
-         <form method="post" th:action="@{create}" th:object="${userForm}"> 
-			 
-         <label>ユーザ名:</label><input type="text" th:field="*{name}"><br> 
-         <label>パスワード:</label><input type="text" th:field="*{password}"><br> 
+        <!-- メインコンテンツ -->
 
-         <input type="submit" value="登録"> 
-         <!--△△　Formを表示　△△-->
-         
-         <!--▽▽ エラーを表示する ▽▽-->
-         <ul th:if="${#fields.hasErrors('*')}">
-			 <li th:each="err:${#fields.errors('*')}" th:text="${err}">
-				 
-			 </li>
-		 </ul>
-		 <!--△△ エラーを表示する △△-->
-		 <!--▽▽ 登録結果を表示する ▽▽-->
-         <th:block th:if="${result}">
-			 <p th:text="${result}"></p>
-         </th>
-         <!--△△ 登録結果を表示する △△-->
-         
-         </form>  
-         <a th:href="@{login}">ログイン</a>
+        <section layout:fragment="context" id="home" style="padding: 80px 0 50px">
+            <div class="container py-3">
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+                        <h2>ユーザ作成</h2>
+                    </div>
+                </div>
+                
+                    <!-- フォーム -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 py-3">
+                            <form method="post" th:action="@{create}" th:object="${userForm}">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingUser" th:field="*{name}" th:value="*{name}" >
+                                    <label for="floatingUser" class="small">ユーザ名</label>
+                                </div>
+                                
+                                <div class="form-floating mt-3">
+                                    <input type="password" class="form-control" id="floatingPassword" th:field="*{password}" th:value="*{password}">
+                                    <label for="floatingPassword" class="small">パスワード  </label>
+                                </div>
+
+                                <div class="mt-2">	
+                                    <!-- エラー表示 -->
+                                    <ul class="list-group list-group-flush small rounded" th:if="${#fields.hasErrors('*')}">
+                                        <li class="list-group-item list-group-item-primary" th:each="err:${#fields.errors('*')}" th:text="${err}">
+                                        </li>
+                                    </ul>
+
+                                    <!-- 登録結果 -->
+                                    <div class="alert alert-primary small" role="alert" th:if="${result}" th:text="${result}">
+                                    </div>
+                                </div>
+                                
+                                <div class="hstack align-items-end mt-2">
+                                    <button class="btn btn-dark btn-gradient rounded-pill px-5">Create</button>
+                                    <div class="mx-2">
+                                        <a th:href="@{login}">ログインページへ</a>
+                                    </div>
+                                </div>
+
+                            </form>
+                            
+                        </div>
+                    </div>
+               	</div>
+               	
+            </div>
+        </section>
     </body>
 </html>
