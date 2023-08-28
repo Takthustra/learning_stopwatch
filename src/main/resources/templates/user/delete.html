@@ -1,22 +1,56 @@
 	<!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org">
+<html lang="ja" class="h-100"
+	　xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
     <head>
-        <meta charset="UTF-8">
-        <title th:text="ユーザ削除"></title>
+        <!-- meta -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href ="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel ="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+        <!-- Bootstrap Icons CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" integrity="sha256-PDJQdTN7dolQWDASIoBVrjkuOEaI137FI15sqI3Oxu8=" crossorigin="anonymous">
+        <title>DeleteUser</title>
     </head>
     <body>
-        <h1 th:text="ユーザ削除"></h1>
-        <div th:if="${boolean} == false">
-	        <h3 th:text="ユーザを削除しても良いですか"></h3>
-			<!--▽▽　Formを表示　▽▽-->
-	         <form method="post" th:action="@{delete}">  
-	         <input type="submit" th:value="ユーザを削除">
-	         <button type="button" onclick="history.back()" th:text="戻る"></button>
-	         </form>  
-        </div>
-        <div th:if="${boolean} == true">
-	        <h3 th:text="ユーザを削除しました。"></h3>
-	        <a th:href="@{login}" th:text="ログインページへ"></a>
-        </div>
+		
+		<!-- メインコンテンツ -->
+        <section layout:fragment="context" id="home" style="padding: 80px 0 50px">
+            <div class="container py-3">
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+                        <h2 class="text-danger" th:text="ユーザ削除"></h2>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-auto py-3">
+                        <div th:if="${boolean} == false">
+                            <p th;text="ユーザを削除するとご利用中のユーザは二度と利用できなくなります。"></p>
+                            <p th:text="本当に削除しますか。"></p>
+                            <!--▽▽　Formを表示　▽▽-->
+                            <div class="hstack align-items-end">
+                                <form class="" method="post" th:action="@{delete}">  
+                                <button class="btn btn-danger btn-gradient rounded-pill" type="submit" th:text="ユーザを削除する"></button>
+                                </form>  
+                                <a class="mx-2" th:href="@{/main/mypage}" th:text="いいえ、削除しません。"></a>
+                            </div>
+                        </div>
+                        
+                        <div th:if="${boolean} == true">
+                            <p th:text="ユーザを削除しました。"></p>
+                            <a th:href="@{login}" th:text="ログインページへ"></a>
+                        </div>
+                    </div>
+                </div>
+
+                    
+                </div>
+            </div>
+        </section>
+
     </body>
 </html>
