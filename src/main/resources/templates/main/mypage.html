@@ -1,25 +1,86 @@
-<!DOCTYPE html>
-<html xmlns="http://www.thymeleaf.org">
+	<!DOCTYPE html>
+<html lang="ja" class="h-100"
+	　xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
     <head>
-        <meta charset="UTF-8">
-        <title>マイページ</title>
+        <!-- meta -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href ="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel ="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+        <!-- Bootstrap Icons CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" integrity="sha256-PDJQdTN7dolQWDASIoBVrjkuOEaI137FI15sqI3Oxu8=" crossorigin="anonymous">
+        <title>Mypage</title>
     </head>
     <body>
-        <h1>マイページ</h1>
-		<!--▽▽　学習記録を表示　▽▽-->
-        <form th:object="${recordForm}">
-         <p th:text="|ユーザ名:*{name}|"></p>
-         <p th:text="|作成日時:*{created_at}|"></p> 
-         <p th:text="|総学習時間:*{totalTime}|" ></p>
-         <div th:each="dlt : *{dlts}">
-			 <p th:text="|日時:【${dlt.date}】学習時間:【${dlt.learning_time}】メモ:【${dlt.memo}】|">
-				 
-			 </p>
-         </div>
-        </form>
-        <!-- △△　学習記録を表示　△△ -->
-        <a th:href="@{/user/logout}" th:text="ログアウトする"></a>
-        <a th:href="@{/user/delete}" th:text="アカウントを削除"></a>
-        <a th:href="@{/user/update_password}" th:text="パスワード変更"></a>
+       <!-- メインコンテンツ -->
+        <section layout:fragment="context" id="home" style="padding: 80px 0 50px">
+            <div class="container py-3">
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+                        <h1>マイページ</h1>
+                    </div>
+                </div>
+
+                <!-- フォーム -->
+                <form th:object="${recordForm}">
+                    <div class="row py-3 justify-content-center">
+                        <div class="col-md-auto">
+                            <p th:text="|ユーザ名:*{name}|">ユーザ名:hoge</p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p th:text="|作成日時:*{created_at}|">作成日時:yyyy/mm/dd</p> 
+                        </div>
+                        <div class="col-md-auto">
+                            <p th:text="|総学習時間:*{totalTime}|" >総学習時間:hh:mm:ss</p>
+                        </div>
+                        
+                    </div>
+                    <!-- 学習記録 -->
+                    <div class="row justify-content-center text-start">
+                        <div class="col-auto">
+                            <table class="table table-light 
+                                          table-striped 
+                                          table-hover 
+                                          table-bordered 
+                                          small 
+                                          table-sm 
+                                          align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>日時</th>
+                                        <th>学習時間</th>
+                                        <th>メモ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="dlt : *{dlts}">
+                                        <td th:text="${dlt.date}" >YYYY/mm/dd</td>
+                                        <td th:text="${dlt.learning_time}" >hh:mm:ss</td>
+                                        <td th:text="${dlt.memo}" >今日は長時間学習に集中できた！</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+                <!-- アカウントサービス -->
+                <div class="row justify-content-center align-items-end py-3">
+                    <div class="col-md-auto">
+                        <a th:href="@{/user/logout}" th:text="ログアウト">ログアウト</a>
+                    </div>
+                    <div class="col-md-auto">
+                        <a th:href="@{/user/delete}" th:text="アカウント削除">アカウント削除</a>
+                    </div>
+                    <div class="col-md-auto">
+                        <a th:href="@{/user/update_password}" th:text="パスワード変更">パスワード変更</a>
+                    </div>
+                </div>
+            </div>
+            <script th:src="@{/js/timer.js}"></script>
+        </section>
     </body>
 </html>
