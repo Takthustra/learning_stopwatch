@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.learning_stopwatch.entity.User;
 import com.example.learning_stopwatch.form.UpdatePasswordForm;
-import com.example.learning_stopwatch.form.UserForm;
+import com.example.learning_stopwatch.form.user.LoginUserForm;
 import com.example.learning_stopwatch.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -31,8 +31,8 @@ public class UserController {
 
 	/** Formの初期化 */
 	@ModelAttribute
-	public UserForm setUpUserForm() {
-		UserForm form = new UserForm();
+	public LoginUserForm setUpUserForm() {
+		LoginUserForm form = new LoginUserForm();
 		return form;
 	}
 	@ModelAttribute
@@ -48,7 +48,7 @@ public class UserController {
 	 */
 
 	@GetMapping("login")
-	public String getLogin(UserForm form, Model model) {
+	public String getLogin(LoginUserForm form, Model model) {
 
 		//ログイン時のsessionが生成されているか確認
 		user = (User) session.getAttribute("user");
@@ -63,7 +63,7 @@ public class UserController {
 	}
 
 	@PostMapping("login")
-	public String postLogin(@Validated UserForm form, BindingResult bindingResult, Model model) {
+	public String postLogin(@Validated LoginUserForm form, BindingResult bindingResult, Model model) {
 		String result = null;
 
 		if (bindingResult.hasErrors()) {
@@ -89,13 +89,13 @@ public class UserController {
 	 */
 
 	@GetMapping("create")
-	public String getCreate(UserForm form, Model model) {
+	public String getCreate(LoginUserForm form, Model model) {
 
 		return "user/create";
 	}
 
 	@PostMapping("create")
-	public String postCreate(@Validated UserForm form, BindingResult bindingResult, Model model) {
+	public String postCreate(@Validated LoginUserForm form, BindingResult bindingResult, Model model) {
 		String result = null;
 
 		if (bindingResult.hasErrors()) {

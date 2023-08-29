@@ -1,4 +1,4 @@
-package com.example.learning_stopwatch.form;
+package com.example.learning_stopwatch.form.user;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserForm {
+public class LoginUserForm {
     /** ユーザ名 */
     @NotBlank(message = "ユーザ名:空白です。")
     private String name;

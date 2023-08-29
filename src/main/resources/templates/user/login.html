@@ -27,7 +27,7 @@
                     <!-- フォーム -->
                     <div class="row justify-content-center">
                         <div class="col-md-6 py-3">
-                            <form method="post" th:action="@{login}" th:object="${userForm}">
+                            <form method="post" th:action="@{login}" th:object="${loginUserForm}">
                                 <div class="form-floating">
                                     <input type="text" class="form-control" id="floatingUser" th:field="*{name}" th:value="*{name}" >
                                     <label for="floatingUser" class="small">ユーザ名</label>
