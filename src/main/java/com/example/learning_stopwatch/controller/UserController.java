@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.learning_stopwatch.entity.User;
 import com.example.learning_stopwatch.form.UpdatePasswordForm;
+import com.example.learning_stopwatch.form.user.CreateUserForm;
 import com.example.learning_stopwatch.form.user.LoginUserForm;
 import com.example.learning_stopwatch.service.UserService;
 
@@ -35,6 +36,13 @@ public class UserController {
 		LoginUserForm form = new LoginUserForm();
 		return form;
 	}
+	
+	@ModelAttribute
+	public CreateUserForm setUpCreateForm() {
+		CreateUserForm form = new CreateUserForm();
+		return form;
+	}
+	
 	@ModelAttribute
 	public UpdatePasswordForm setUpUpdatePasswordForm() {
 		UpdatePasswordForm form = new UpdatePasswordForm();
@@ -89,13 +97,13 @@ public class UserController {
 	 */
 
 	@GetMapping("create")
-	public String getCreate(LoginUserForm form, Model model) {
+	public String getCreate(CreateUserForm form, Model model) {
 
 		return "user/create";
 	}
 
 	@PostMapping("create")
-	public String postCreate(@Validated LoginUserForm form, BindingResult bindingResult, Model model) {
+	public String postCreate(@Validated CreateUserForm form, BindingResult bindingResult, Model model) {
 		String result = null;
 
 		if (bindingResult.hasErrors()) {
@@ -103,14 +111,27 @@ public class UserController {
 			return "user/create";
 		}
 
-		//データベースに登録できたかの判断
-		boolean bool = service.createUser(form.getName(), form.getPassword());
-		if (bool) {
-			result = "ユーザ名:" + form.getName() + "で登録完了しました！";
+		//formのフィールドを変数に格納
+		String name = form.getName();
+		String password = form.getPassword();
+		String checkPassword = form.getCheckPassword();
+		
+		if(!password.equals(checkPassword)){
+			//パスワードと確認用パスワードの相違
+			result = "同じパスワードを入力してください。";
+			
+		}else {
+			//データベースに登録できたかの判断
+			boolean bool = service.createUser(name, password);
+			if (bool) {
+				result = "ユーザ名:" + form.getName() + "で登録完了しました！";
 
-		} else {
-			result = "ユーザ名:" + form.getName() + "は既に使われています。";
+			} else {
+				result = "ユーザ名:" + form.getName() + "は既に使われています。";
+			}
+			
 		}
+		
 
 		model.addAttribute("result", result);
 		return "user/create";
