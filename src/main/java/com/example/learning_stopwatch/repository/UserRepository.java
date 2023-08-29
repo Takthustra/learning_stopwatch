@@ -15,11 +15,11 @@ public interface UserRepository extends CrudRepository<User,Integer>{
 	void createUser(@Param("name") String name,@Param("password") String password);
 	
 	//ユーザ重複確認
-	@Query("SELECT NAME FROM USER WHERE NAME = :name")
+	@Query("select name from user where name = :name")
 	String uniqueUser(@Param("name") String name);
 	
 	//ユーザ照合
-	@Query("SELECT * FROM USER WHERE NAME = :name AND PASSWORD = :password")
+	@Query("select * from user where name = :name and password = :password")
 	User loginUser(@Param("name") String name,@Param("password") String password);
 
 	//パスワード変更
