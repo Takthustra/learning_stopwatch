@@ -64,7 +64,10 @@ public class MainController {
 
 	@PostMapping("stopwatch")
 	public String postMain(StopwatchForm form, Model model) {
+		
 		//ログイン時のsessionが生成されているか確認
+		user = (User) session.getAttribute("user");
+		
 		if (user != null) {
 			int id = user.getId();
 
@@ -81,6 +84,8 @@ public class MainController {
 	@GetMapping("mypage")
 	public String getMypage(RecordForm form){
 		//ログイン時のsessionが生成されているか確認
+		user = (User) session.getAttribute("user");
+		
 		if (user != null) {
 			//学習記録の各種データを取得
 			int id = user.getId();
