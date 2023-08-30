@@ -23,17 +23,19 @@
                 <div class="row align-items-center justify-content-center">
 
                 <!-- 左側 -->
-                <div class="col-md-auto">
+                <div class="col-md-auto ">
 	                <h1 th:text="学びを刻もう。"></h1>
 	                <div class="ms-2 mt-3">
-		                <p th:text="サン＝テグジュペリ：「努めなければならないのは、自分を完成させることだ。」"></p>
-		                <p th:text="さぁ、今から始めよう。"></p>
+		                <div class="small" th:text="「努めなければならないのは、自分を完成させることだ。」"></div>
+		                <div class="small" th:text="'(サン＝テグジュペリ)'"></div>
+		                
+		                <p class="pt-3" th:text="さぁ、今から始めよう。"></p>
 	                </div>
-                    <div class="hstack">
+                    <div class="hstack align-items-end">
                         <a th:href="@{user/create}" class="btn btn-dark px-5 shadow">
                             ユーザ作成
                         </a>
-                        <div class="small" style="margin-top: 1rem; margin-left: 1rem;">
+                        <div class="small px-3">
                             または、<a th:href="@{user/login}" th:text="ログイン"></a>
                         </div>
                     </div>
