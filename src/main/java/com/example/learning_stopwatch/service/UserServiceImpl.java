@@ -38,6 +38,12 @@ public class UserServiceImpl implements UserService{
         //ユーザ名とパスワードで照合できるかチェック
     	User user = repository.loginUser(name, password);
     	if(user != null) {
+    		
+    		//ゲストアカウントならデータをクリア
+    		if(user.getName().equals("guest")) {
+    			repository.deleteUserData(user.getId());
+    		}
+    		
     		//照合出来たらセッションにUser情報を保存
     		session.setAttribute("user",user);
     		return true;
@@ -53,11 +59,15 @@ public class UserServiceImpl implements UserService{
     }
     
     
-
     @Override
     public void deleteUser(User user) {
         repository.delete(user);
         
+    }
+    
+    @Override
+    public void clearUserData(User user) {
+        repository.deleteUserData(user.getId());
     }
 
 }

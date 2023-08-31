@@ -12,4 +12,6 @@ public interface UserService{
     void updatePassword(String name,String password);
     /** ユーザを削除します */
     void deleteUser(User user);
+    /** ユーザのデータをクリアします */
+    void clearUserData(User user);
 }
