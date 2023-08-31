@@ -2,6 +2,7 @@ const stopwatch = document.getElementById('stopwatch');
 const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
 const resetButton = document.getElementById('reset');
+const saveButton = document.getElementById('save');
 
 //stoptimeの保存用スペース
 let cur;
@@ -40,6 +41,9 @@ function displayTime() {
   const h = String(currentTime.getUTCHours()).padStart(2, '0');
   const m = String(currentTime.getUTCMinutes()).padStart(2, '0');
   const s = String(currentTime.getUTCSeconds()).padStart(2, '0');
+  
+  //tst  
+  cur.value = currentTime;
 
   stopwatch.textContent = `${h}:${m}:${s}`;
   document.querySelector("input[name='time']").value = `${h}:${m}:${s}`;
