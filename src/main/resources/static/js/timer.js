@@ -43,7 +43,7 @@ function displayTime() {
   const s = String(currentTime.getUTCSeconds()).padStart(2, '0');
   
   //tst  
-  cur.value = currentTime;
+  cur.value = Date.now() - startTime + stopTime;
 
   stopwatch.textContent = `${h}:${m}:${s}`;
   document.querySelector("input[name='time']").value = `${h}:${m}:${s}`;
