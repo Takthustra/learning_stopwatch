@@ -56,7 +56,8 @@
                                     <button type="submit" class="btn btn-dark btn-gradient rounded-pill px-5">Login</button>
                                  
                                     <div class="mx-2">
-                                        初めての方は、<a th:href="@{create}">新規登録</a>
+                                        初めての方は、<a th:href="@{create}">新規登録</a><br>
+                                        または、<a th:href="@{/user/guest_login}" th:text="ゲストログイン"></a>
                                     </div>
                                 </div>
                                     

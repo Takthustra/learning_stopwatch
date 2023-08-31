@@ -66,19 +66,21 @@
                             </table>
                         </div>
                     </div>
-                </form>
-                <!-- アカウントサービス -->
-                <div class="row justify-content-center align-items-end py-3">
-                    <div class="col-md-auto">
-                        <a th:href="@{/user/logout}" th:text="ログアウト">ログアウト</a>
-                    </div>
-                    <div class="col-md-auto">
-                        <a th:href="@{/user/delete}" th:text="アカウント削除">アカウント削除</a>
-                    </div>
-                    <div class="col-md-auto">
-                        <a th:href="@{/user/update_password}" th:text="パスワード変更">パスワード変更</a>
-                    </div>
-                </div>
+                
+	                <!-- アカウントサービス -->
+	                <div th:if="*{name} == 'guest'" class="row justify-content-center align-items-end py-3">
+						<div class="col-md-auto">
+	                        <a th:href="@{/user/logout}" th:text="ログアウト">ログアウト</a>
+	                    </div>
+	                </div>
+	                <div th:unless="*{name} == 'guest'" class="row justify-content-center align-items-end py-3">
+						<div class="col-md-auto">
+	                        <a class="mx-2" th:href="@{/user/logout}" th:text="ログアウト">ログアウト</a>
+	                        <a class="mx-2" th:href="@{/user/delete}" th:text="アカウント削除">アカウント削除</a>
+	                        <a class="mx-2" th:href="@{/user/update_password}" th:text="パスワード変更">パスワード変更</a>               
+	                    </div>
+	                </div>
+	             </form>
             </div>
             <script th:src="@{/js/timer.js}"></script>
         </section>

@@ -255,5 +255,21 @@ public class UserController {
 		model.addAttribute("result", result);
 		return "user/update_password";
 	}
+	
+	@GetMapping("guest_login")
+	public String getGuestLogin(Model model) {
+		String result = null;
+
+		//ログインできたかの判断
+		boolean bool = service.loginUser("guest", "password");
+		if (bool) {
+			return "redirect:/main/stopwatch";
+
+		} else {
+			result = "ログインできませんでした。";
+		}
+		model.addAttribute("result", result);
+		return "user/login";
+	}
 
 }
